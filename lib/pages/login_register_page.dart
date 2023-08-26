@@ -13,14 +13,12 @@ class _LoginPageState extends State<LoginPage> {
   String? errorMessage = '';
   bool isLogin = true;
   final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllePassword = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
 
   Future<void> signInWithEmailAndPassword() async {
     try {
       await Auth().signInWithEmailAndPassword(
-        email: _controllerEmail.text,
-        password: _controllePassword.text,
-      );
+          email: _controllerEmail.text, password: _controllerPassword.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -31,9 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> createUserWithEmailAndPassword() async {
     try {
       await Auth().createUserWithEmailAndPassword(
-        email: _controllerEmail.text,
-        password: _controllePassword.text,
-      );
+          email: _controllerEmail.text, password: _controllerPassword.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -45,10 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     return const Text('firebase auth');
   }
 
-  Widget _entryField(
-    String title,
-    TextEditingController controller,
-  ) {
+  Widget _entryField(String title, TextEditingController controller) {
     return TextField(
       controller: controller,
       decoration: InputDecoration(labelText: title),
@@ -92,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _entryField('email', _controllerEmail),
-              _entryField('password', _controllePassword),
+              _entryField('password', _controllerPassword),
               _errorMessage(),
               _submitButton(),
               _loginOrRegisterButton(),
